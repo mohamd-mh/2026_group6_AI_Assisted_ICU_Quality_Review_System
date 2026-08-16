@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research Question & Goals - AI-Assisted ICU Quality Review Workbench</title>
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="topbar-brand" href="../index.html" aria-label="AI-Assisted ICU Quality Review Workbench home">
+        <span class="brand-mark">ICU</span>
+        <span class="brand-text"><strong>AI-Assisted ICU Quality Review Workbench</strong><span>Static seminar project website</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="../index.html">Home</a>
+        <div class="nav-dropdown">
+          <button class="nav-trigger active" type="button" aria-haspopup="true">Project</button>
+          <div class="dropdown-menu">
+            <a href="research-question.html">Research Question &amp; Goals</a>
+            <a href="system-overview.html">Workbench Overview</a>
+            <a href="architecture.html">Architecture</a>
+            <a href="dataset-preprocessing.html">Dataset &amp; Preprocessing</a>
+            <a href="ai-methodology.html">AI Methodology</a>
+            <a href="evaluation-results.html">Evaluation &amp; Results</a>
+            <a href="development-process.html">Development Process</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-haspopup="true">Materials</button>
+          <div class="dropdown-menu">
+            <a href="related-work.html">Related Work / Articles</a>
+            <a href="user-manual.html">User Manual</a>
+            <a href="team.html">Team</a>
+            <a href="downloads.html">Downloads</a>
+          </div>
+        </div>
+        <a class="nav-link" href="software-system.html">The Software</a>
+        <span class="search-icon" aria-hidden="true"></span>
+      </nav>
+    </div>
+  </header>
+  <main class="main-content">
+    <section class="page-panel">
+      <span class="eyebrow">Research Question &amp; Goals</span>
+      <h1>Research Question</h1>
+      <p class="lead">How does structuring AI-based ICU risk prediction as a modular, role-separated software workflow &mdash; rather than a single opaque model &mdash; affect the reliability, transparency, and auditability of the resulting system, compared with a single-pipeline baseline?</p>
+    </section>
+
+    <section class="section grid two">
+      <article class="card">
+        <span>Engineering Problem</span>
+        <h2>Quality review needs traceability</h2>
+        <p>The project addresses whether AI-based ICU risk prediction should be delivered as a single opaque model, or restructured as a modular workflow with role-separated components (data validation, SIRS-based baseline scoring, weighted clinical assessment, verification with escalation, and explanation). The engineering challenge is to compare these two approaches directly &mdash; on reliability, transparency, and auditability &mdash; rather than assuming a more elaborate architecture is automatically superior.</p>
+      </article>
+      <article class="card">
+        <span>Importance</span>
+        <h2>Transparent review support</h2>
+        <p>ICU quality review requires careful prioritization, explanation, handoff summary preparation, and documentation. A risk score alone is not enough. The coordinator needs traceability, confidence signals, missing-data awareness, and safe boundaries around what the AI can and cannot do.</p>
+      </article>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Goals</span>
+      <h2>Project Goals</h2>
+      <ul>
+        <li>Design and implement a modular, role-separated software workflow for ICU quality review, and systematically compare it against a single-pipeline SIRS baseline on reliability, transparency, auditability, and predictive accuracy.</li>
+        <li>Use a processed academic ICU dataset and exclude leakage columns from prediction inputs.</li>
+        <li>Train and report real supervised ML risk prediction rather than use fake AI output.</li>
+        <li>Provide explainability, screening, similar-case retrieval, clustering, anomaly context, recommendation support, and uncertainty estimation.</li>
+        <li>Prepare a Review Ticket and Prepared Review Summary for the Quality &amp; Patient Safety Review Team.</li>
+        <li>Support review queue management, documentation, status, priority, notes, archiving, handoff summary, and audit trail.</li>
+        <li>Keep clinical claims limited to quality-review support, not diagnosis or treatment.</li>
+      </ul>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Expected Contribution</span>
+      <h2>Contribution</h2>
+      <p>The project contributes a course-level software engineering artifact that shows how structuring AI-based ICU risk prediction as a modular, role-separated workflow &mdash; and evaluating it against a single-pipeline SIRS baseline &mdash; affects the reliability, transparency, and auditability of ICU quality-review prioritization. Its contribution is not clinical validation. Its value is organizing prediction, screening, explanation, review-support recommendation, summary preparation, and smoke-test verification into a documented, auditable workflow for a human coordinator.</p>
+    </section>
+        </main>
+  <footer class="site-footer">
+        <p>AI-Assisted ICU Quality Review Workbench. Static documentation package for course submission.</p>
+      </footer>
+</body>
+</html>

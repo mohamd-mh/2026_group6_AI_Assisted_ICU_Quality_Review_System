@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evaluation & Results - AI-Assisted ICU Quality Review Workbench</title>
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="topbar-brand" href="../index.html" aria-label="AI-Assisted ICU Quality Review Workbench home">
+        <span class="brand-mark">ICU</span>
+        <span class="brand-text"><strong>AI-Assisted ICU Quality Review Workbench</strong><span>Static seminar project website</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="../index.html">Home</a>
+        <div class="nav-dropdown">
+          <button class="nav-trigger active" type="button" aria-haspopup="true">Project</button>
+          <div class="dropdown-menu">
+            <a href="research-question.html">Research Question &amp; Goals</a>
+            <a href="system-overview.html">Workbench Overview</a>
+            <a href="architecture.html">Architecture</a>
+            <a href="dataset-preprocessing.html">Dataset &amp; Preprocessing</a>
+            <a href="ai-methodology.html">AI Methodology</a>
+            <a href="evaluation-results.html">Evaluation &amp; Results</a>
+            <a href="development-process.html">Development Process</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-haspopup="true">Materials</button>
+          <div class="dropdown-menu">
+            <a href="related-work.html">Related Work / Articles</a>
+            <a href="user-manual.html">User Manual</a>
+            <a href="team.html">Team</a>
+            <a href="downloads.html">Downloads</a>
+          </div>
+        </div>
+        <a class="nav-link" href="software-system.html">The Software</a>
+        <span class="search-icon" aria-hidden="true"></span>
+      </nav>
+    </div>
+  </header>
+  <main class="main-content">
+    <section class="page-panel">
+      <span class="eyebrow">Evaluation &amp; Results</span>
+      <h1>Available Model and Workflow Results</h1>
+      <p class="lead">The values on this page come from <code>models/ai_model_metrics.json</code>, <code>models/ai_model_metadata.json</code>, and <code>data/evaluation_results.json</code> in the current Software_System folder.</p>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Methodology</span>
+      <h2>How the System Was Evaluated</h2>
+      <p>The two result tables below come from two different evaluation procedures, described here before the numbers themselves.</p>
+      <div class="grid two">
+        <article class="card">
+          <span>Logistic Regression model</span>
+          <h2>Held-out test split</h2>
+          <p>The model was trained on a stratified 75/25 train/test split of <code>patient_features_ai.csv</code> (750 training rows, 250 held-out test rows, <code>random_state=42</code>). The Logistic Regression metrics table on this page is computed on the 250-row held-out test set only, which the model never saw during training.</p>
+        </article>
+        <article class="card">
+          <span>Baseline vs. modular workflow</span>
+          <h2>Full processed dataset</h2>
+          <p>The SIRS-style baseline is a fixed rule, not a trained model, so the Baseline vs. Modular Workflow comparison table runs both pipelines across all 1000 rows of <code>patient_features_ai.csv</code> rather than the held-out split. This measures workflow behavior across the full processed cohort, not generalization to unseen data.</p>
+        </article>
+      </div>
+      <h3>Target label</h3>
+      <p>The supervised label is <code>hospital_expire_flag</code> (in-hospital mortality). It is used only to train and evaluate the model and is excluded from the model's input features.</p>
+      <h3>Why multiple metrics instead of accuracy alone</h3>
+      <p>The label is imbalanced: 894 survived vs. 106 died (10.6% mortality). A model that always predicted "survived" would already score about 89.4% accuracy while catching zero deaths, so accuracy alone would be misleading here. Precision, recall, F1, ROC-AUC, and the confusion matrix are reported together so both false negatives (missed deaths) and false positives (unnecessary review burden) are visible.</p>
+      <h3>High-risk detection vs. At-risk detection</h3>
+      <p>The mortality label is binary (survived/died), but both pipelines output three risk tiers (Low/Medium/High). To compare them against the binary label, each pipeline's output is scored two ways: <strong>High-risk detection</strong> counts only a "High" tier as a positive prediction, while <strong>At-risk detection</strong> counts "Medium" or "High" as positive. The two framings show how each pipeline performs under a stricter definition of risk versus a broader one.</p>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Selected ML Model</span>
+      <h2>Logistic Regression Metrics</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Metric</th><th>Default 0.5 Cutoff</th><th>Tuned Cutoff 0.6136</th></tr></thead>
+          <tbody>
+            <tr><td>Accuracy</td><td>0.732</td><td>0.804</td></tr>
+            <tr><td>Precision</td><td>0.259</td><td>0.298</td></tr>
+            <tr><td>Recall</td><td>0.846</td><td>0.654</td></tr>
+            <tr><td>F1 score</td><td>0.396</td><td>0.410</td></tr>
+            <tr><td>ROC-AUC</td><td>0.838</td><td>Not separately reported for tuned cutoff</td></tr>
+            <tr><td>Confusion matrix</td><td>[[161, 63], [4, 22]]</td><td>[[184, 40], [9, 17]]</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The tuned cutoff was selected as an F1-maximizing cutoff from training predictions using <code>precision_recall_curve</code>. It improves precision and accuracy in the saved test results while reducing recall compared with the default 0.5 cutoff.</p>
+    </section>
+
+    <section class="section grid four">
+      <div class="metric summary-card"><span>Total rows</span><strong>1000</strong><p>Class distribution metadata.</p></div>
+      <div class="metric summary-card"><span>Survived label</span><strong>894</strong><p>Class 0.</p></div>
+      <div class="metric summary-card"><span>Died label</span><strong>106</strong><p>Class 1.</p></div>
+      <div class="metric summary-card"><span>Mortality rate</span><strong>10.6%</strong><p>From evaluation metadata.</p></div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Confusion Matrix</span>
+      <h2>How to read the saved test results</h2>
+      <div class="grid two">
+        <article class="card">
+          <span>Default cutoff</span>
+          <h2>0.5 threshold</h2>
+          <p><strong>Matrix:</strong> [[161, 63], [4, 22]]</p>
+          <p>This cutoff favors recall and catches more positive cases, but it also creates more false positives.</p>
+        </article>
+        <article class="card">
+          <span>Tuned cutoff</span>
+          <h2>0.6136 threshold</h2>
+          <p><strong>Matrix:</strong> [[184, 40], [9, 17]]</p>
+          <p>This cutoff improves precision and accuracy in the saved results, while reducing recall.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Baseline vs Modular Workflow</span>
+      <h2>Evaluation Results</h2>
+      <p>Baseline uses the SIRS (Systemic Inflammatory Response Syndrome) criteria (Bone et al., 1992). SIRS-positive is defined as 2 or more of 4 criteria (temperature &gt; 38C or &lt; 36C; heart rate &gt; 90/min; respiratory rate &gt; 20/min; white blood cell count &gt; 12,000/mm3 or &lt; 4,000/mm3), mapped to Low (0-1 criteria), Medium (2 criteria, SIRS-positive), and High (3-4 criteria). Citation: Bone, R.C., Balk, R.A., Cerra, F.B., et al. (1992). "Definitions for sepsis and organ failure and guidelines for the use of innovative therapies in sepsis." Chest, 101(6), 1644-1655.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Task</th><th>Workflow</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>TP / FP / TN / FN</th></tr></thead>
+          <tbody>
+            <tr><td>High-risk detection</td><td>Baseline</td><td>0.86</td><td>0.34</td><td>0.33</td><td>0.33</td><td>35 / 69 / 825 / 71</td></tr>
+            <tr><td>High-risk detection</td><td>Modular workflow</td><td>0.86</td><td>0.35</td><td>0.38</td><td>0.36</td><td>40 / 75 / 819 / 66</td></tr>
+            <tr><td>At-risk detection</td><td>Baseline</td><td>0.674</td><td>0.193</td><td>0.651</td><td>0.297</td><td>69 / 289 / 605 / 37</td></tr>
+            <tr><td>At-risk detection</td><td>Modular workflow</td><td>0.673</td><td>0.199</td><td>0.689</td><td>0.309</td><td>73 / 294 / 600 / 33</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The modular workflow's improvement over the SIRS baseline is real but narrow. Of the 15 escalated cases (1.5% of 1000), 11 affect High-Risk detection (5 Low&rarr;High plus 6 Medium&rarr;High) and 9 affect At-Risk detection (5 Low&rarr;High plus 4 Low&rarr;Medium); the 6 Medium&rarr;High escalations don't change At-Risk classification since Medium already counts as at-risk. The escalated subset has a 40.0% true mortality rate vs. 10.6% overall (~3.8x enrichment), concentrated entirely in emergency admissions. With only 15 affected rows, the exact magnitude should not be treated as a stable, generalizable effect. The main workflow contribution remains transparency, traceability, documentation, and auditability rather than predictive accuracy.</p>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Tradeoff</span>
+      <h2>Precision and Recall</h2>
+      <p>The dataset is imbalanced, with 106 positive labels out of 1000 rows. The default balanced Logistic Regression cutoff favors recall, which catches more positive cases but increases false positives. The tuned threshold raises precision and lowers recall. In a quality-review queue, this tradeoff affects workload: high recall can surface more cases for review, while higher precision can reduce unnecessary review burden.</p>
+    </section>
+
+    <section class="section notice">
+      <span class="eyebrow">Limitations</span>
+      <h2>Known Limits</h2>
+      <ul>
+        <li>Metrics are based on the processed academic dataset and are not clinical validation.</li>
+        <li>Class imbalance makes precision/recall tradeoffs important.</li>
+        <li>Raw MIMIC files are not included, so preprocessing is documented but not reproduced from raw tables in the package.</li>
+        <li>The modular workflow improves transparency and documentation, but it is not an autonomous clinical decision-maker.</li>
+        <li>This is an academic prototype evaluation on a processed, held-out MIMIC-III feature table (patient_features_ai.csv, 1000 rows) - not a live clinical deployment. Regenerating the processed dataset or retraining the model may change these exact numbers.</li>
+      </ul>
+    </section>
+        </main>
+  <footer class="site-footer">
+        <p>AI-Assisted ICU Quality Review Workbench. Static documentation package for course submission.</p>
+      </footer>
+</body>
+</html>

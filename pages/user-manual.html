@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Manual - AI-Assisted ICU Quality Review Workbench</title>
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="topbar-brand" href="../index.html" aria-label="AI-Assisted ICU Quality Review Workbench home">
+        <span class="brand-mark">ICU</span>
+        <span class="brand-text"><strong>AI-Assisted ICU Quality Review Workbench</strong><span>Static seminar project website</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="../index.html">Home</a>
+        <div class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-haspopup="true">Project</button>
+          <div class="dropdown-menu">
+            <a href="research-question.html">Research Question &amp; Goals</a>
+            <a href="system-overview.html">Workbench Overview</a>
+            <a href="architecture.html">Architecture</a>
+            <a href="dataset-preprocessing.html">Dataset &amp; Preprocessing</a>
+            <a href="ai-methodology.html">AI Methodology</a>
+            <a href="evaluation-results.html">Evaluation &amp; Results</a>
+            <a href="development-process.html">Development Process</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-trigger active" type="button" aria-haspopup="true">Materials</button>
+          <div class="dropdown-menu">
+            <a href="related-work.html">Related Work / Articles</a>
+            <a href="user-manual.html">User Manual</a>
+            <a href="team.html">Team</a>
+            <a href="downloads.html">Downloads</a>
+          </div>
+        </div>
+        <a class="nav-link" href="software-system.html">The Software</a>
+        <span class="search-icon" aria-hidden="true"></span>
+      </nav>
+    </div>
+  </header>
+  <main class="main-content">
+    <section class="page-panel">
+      <span class="eyebrow">User Manual</span>
+      <h1>Running and Using the Workbench</h1>
+      <p class="lead">This manual describes the separate runnable software deliverable inside <code>Software_System.zip</code>. The website itself is static and needs only a browser.</p>
+    </section>
+
+    <section class="section grid two">
+      <article class="card">
+        <span>System Requirements</span>
+        <h2>Requirements</h2>
+        <ul>
+          <li>Windows machine or compatible local Python environment.</li>
+          <li>Python 3 with virtual environment support.</li>
+          <li>Web browser for the local Flask application.</li>
+          <li>No external database setup required.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <span>Dependencies</span>
+        <h2>Installed from requirements.txt</h2>
+        <p>The runnable product installs its Python dependencies from <code>requirements.txt</code>. The package includes Flask, pandas, scikit-learn, numpy, joblib, and related local application dependencies.</p>
+      </article>
+    </section>
+
+    <section class="section page-panel">
+  <span class="eyebrow">Simple Start</span>
+  <h2>Run the Software</h2>
+  <p>
+    After downloading <code>Software_System.zip</code>, extract it first. Open a terminal inside the extracted
+    <code>Software_System</code> folder and first try to run the application directly:
+  </p>
+  <pre>python app.py</pre>
+  <p>
+    Then open <code>http://127.0.0.1:5000</code> in the browser.
+  </p>
+</section>
+
+<section class="section grid two">
+  <article class="card">
+    <span>Git Bash Backup</span>
+    <h2>If Dependencies Are Missing</h2>
+    <p>
+      If <code>python app.py</code> does not work in Git Bash because dependencies are missing, create a virtual environment
+      and install the required packages:
+    </p>
+    <pre>python -m venv .venv
+source .venv/Scripts/activate
+pip install -r requirements.txt
+python app.py</pre>
+  </article>
+
+  <article class="card">
+    <span>PowerShell Backup</span>
+    <h2>If Dependencies Are Missing</h2>
+    <p>
+      If <code>python app.py</code> does not work in PowerShell because dependencies are missing, create a virtual environment
+      and install the required packages:
+    </p>
+    <pre>python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python app.py</pre>
+  </article>
+</section>
+
+<section class="section page-panel">
+  <span class="eyebrow">PowerShell Fallback</span>
+  <h2>If Activation Is Blocked</h2>
+  <p>
+    If PowerShell blocks the virtual-environment activation command, run the following command in the same terminal session:
+  </p>
+  <pre>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</pre>
+  <p>
+    Then activate the virtual environment again and run <code>python app.py</code>.
+  </p>
+</section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Inputs and Steps</span>
+      <h2>Required Inputs</h2>
+      <p>The user can select an existing processed ICU case from the case library or enter a manual case with available demographic, admission, vital-sign, and laboratory fields. Missing values are handled by the preprocessing/model pipeline.</p>
+      <h2>Automatic Steps</h2>
+      <ul>
+        <li>Load processed features and align the model input schema.</li>
+        <li>Apply imputation and preprocessing.</li>
+        <li>Generate supervised ML risk probability and risk band.</li>
+        <li>Generate explanation, similar-case, cluster, anomaly, and uncertainty context.</li>
+        <li>Prepare review ticket and handoff-summary content for the review team.</li>
+        <li>Create or update workflow records and audit events.</li>
+      </ul>
+      <h2>Manual Steps</h2>
+      <ul>
+        <li>Open the review queue or add a new case.</li>
+        <li>Review AI-supported output in the context of quality review.</li>
+        <li>Set status and priority.</li>
+        <li>Add review notes and follow-up documentation.</li>
+        <li>Archive records when review work is complete.</li>
+      </ul>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Outputs</span>
+      <h2>System Outputs</h2>
+      <ul>
+        <li>Risk probability and Low/Medium/High review-support risk band.</li>
+        <li>Confidence and uncertainty indicators.</li>
+        <li>Top model explanation signals.</li>
+        <li>Similar case context, cluster context, and anomaly context.</li>
+        <li>Review Ticket and Prepared Review Summary for the Quality &amp; Patient Safety Review Team.</li>
+        <li>Review notes, status, priority, archive status, and audit history.</li>
+      </ul>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Interface Walkthrough</span>
+      <h2>Screenshots</h2>
+      <p class="lead">The screenshots below walk through the coordinator-facing pages of the runnable Software_System application, grouped by page.</p>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Interface Walkthrough</span>
+      <h2>Dashboard</h2>
+      <div class="screenshot-group">
+        <figure class="screenshot-figure">
+          <img src="../assets/img/dashboard-header.png" alt="Dashboard header with Safety scope banner and Start Next Review button" loading="lazy">
+          <figcaption>The Dashboard is the entry point for coordinators. The Safety scope banner reinforces that this tool supports prioritization and documentation only. Use "Start Next Review" to jump directly to the highest-priority active ticket.</figcaption>
+        </figure>
+        <figure class="screenshot-figure">
+          <img src="../assets/img/top-cases-table.png" alt="Top cases table ranked by AI risk tier, SIRS result, data quality, and recommended action" loading="lazy">
+          <figcaption>Cases are ranked by AI risk tier, SIRS screening result, data quality, and recommended action - giving the coordinator a clear starting point for review, not just a raw score.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Interface Walkthrough</span>
+      <h2>Review Queue</h2>
+      <div class="screenshot-group">
+        <figure class="screenshot-figure">
+          <img src="../assets/img/review-queue.png" alt="Review Queue listing cases ranked by review priority, AI risk, SIRS screening, data quality, and status" loading="lazy">
+          <figcaption>The Review Queue is the coordinator's active worklist: cases ranked by review priority, AI risk, SIRS screening, data quality, and status, with filters to narrow the list.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Interface Walkthrough</span>
+      <h2>Case Library</h2>
+      <div class="screenshot-group">
+        <figure class="screenshot-figure">
+          <img src="../assets/img/case-library-list.png" alt="Processed case list of 1000 cases showing AI risk, SIRS screening result, and data quality" loading="lazy">
+          <figcaption>The processed case list (1000 cases total) shows AI risk, SIRS screening result, and data quality for each case at a glance.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Interface Walkthrough</span>
+      <h2>Case Safety Profile</h2>
+      <div class="screenshot-group">
+        <figure class="screenshot-figure">
+          <img src="../assets/img/review-ticket-ai-guide.png" alt="AI Review Guide summarizing why a case was flagged: risk level, SIRS screening, data quality, and key model signals" loading="lazy">
+          <figcaption>Opening a case shows an AI Review Guide summarizing why it was flagged: risk level, SIRS screening, data quality, and the key model signals, in plain language.</figcaption>
+        </figure>
+        <figure class="screenshot-figure">
+          <img src="../assets/img/case-safety-profile-risk-summary.png" alt="AI Risk Summary breaking down the model, predicted probability, confidence, and top model signals" loading="lazy">
+          <figcaption>The AI Risk Summary breaks down the model, predicted probability, confidence, and the top model signals driving the suggested review priority.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Interface Walkthrough</span>
+      <h2>Create Review Ticket</h2>
+      <div class="screenshot-group">
+        <figure class="screenshot-figure">
+          <img src="../assets/img/create-review-ticket.png" alt="Create Review Ticket form with validation and step-by-step explanation of what happens after submission" loading="lazy">
+          <figcaption>Coordinators can create a local review ticket for a case not already in the Case Library, with built-in validation and a step-by-step explanation of what happens after submission.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Interface Walkthrough</span>
+      <h2>Review Ticket</h2>
+      <div class="screenshot-group">
+        <figure class="screenshot-figure">
+          <img src="../assets/img/review-ticket-workflow-steps.png" alt="Review Ticket four-step guided checklist: Check Signals, Add Note, Prepare Summary, Mark Ready for Team" loading="lazy">
+          <figcaption>Each Review Ticket walks the coordinator through four steps - Check Signals, Add Note, Prepare Summary, Mark Ready for Team - with a guided checklist to support consistent review.</figcaption>
+        </figure>
+        <figure class="screenshot-figure">
+          <img src="../assets/img/review-ticket-summary-snapshot.png" alt="Review Ticket Summary snapshot showing AI risk, SIRS screening, data quality, priority, and recommended action" loading="lazy">
+          <figcaption>The Review Ticket Summary gives a compact snapshot: AI risk, SIRS screening, data quality, priority, and the recommended coordinator action for this ticket.</figcaption>
+        </figure>
+        <figure class="screenshot-figure">
+          <img src="../assets/img/review-ticket-prepared-summary-trace.png" alt="Prepared Review Summary handoff text alongside the AI Workflow Trace" loading="lazy">
+          <figcaption>The Prepared Review Summary auto-generates the handoff text for the Quality &amp; Patient Safety Review Team, backed by a transparent AI Workflow Trace showing each processing step.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Interface Walkthrough</span>
+      <h2>Model Validation</h2>
+      <div class="screenshot-group">
+        <figure class="screenshot-figure">
+          <img src="../assets/img/model-validation-metrics.png" alt="Saved evaluation metrics for the trained Logistic Regression model: accuracy, precision, recall, F1, and ROC-AUC" loading="lazy">
+          <figcaption>Saved evaluation metrics for the trained Logistic Regression model: accuracy, precision, recall, F1, and ROC-AUC.</figcaption>
+        </figure>
+        <figure class="screenshot-figure">
+          <img src="../assets/img/model-validation-comparison.png" alt="Comparison of the SIRS-style baseline and the modular workflow across High-risk and At-risk detection with confusion matrices" loading="lazy">
+          <figcaption>Head-to-head comparison of the SIRS-style baseline and the modular workflow across High-risk and At-risk detection, including full confusion matrices.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Interface Walkthrough</span>
+      <h2>AI Risk Engine</h2>
+      <div class="screenshot-group">
+        <figure class="screenshot-figure">
+          <img src="../assets/img/ai-risk-engine-model.png" alt="Layer 1 trained ML model: Logistic Regression trained on 1000 rows with 13 input features targeting hospital_expire_flag" loading="lazy">
+          <figcaption>Layer 1: the real trained ML model - a Logistic Regression model trained on 1000 rows with 13 input features, targeting hospital_expire_flag.</figcaption>
+        </figure>
+        <figure class="screenshot-figure">
+          <img src="../assets/img/ai-risk-engine-sirs-analytics.png" alt="Layer 2 SIRS-style screening baseline and Layer 3 supporting AI analytics including similar cases, cluster context, and anomaly detection" loading="lazy">
+          <figcaption>Layer 2: the SIRS-style screening baseline (Bone et al., 1992), shown separately from the trained model. Layer 3: supporting AI analytics - similar cases (KNN), cluster context (KMeans), anomaly detection (IsolationForest), uncertainty estimation, feature-importance explanation, and an optional LLM summary assistant.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Repository Structure</span>
+      <h2>Important Folders and Files</h2>
+      <pre>Software_System/
+  app.py
+  review_store.py
+  agents/
+  baseline/
+  evaluation/
+  ml/
+  models/
+  data/
+    patient_features_ai.csv
+    feature_availability_report.csv
+    evaluation_results.json
+  templates/
+  static/
+  requirements.txt
+  README.md</pre>
+    </section>
+        </main>
+  <footer class="site-footer">
+        <p>AI-Assisted ICU Quality Review Workbench. Static documentation package for course submission.</p>
+      </footer>
+</body>
+</html>

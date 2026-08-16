@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Methodology - AI-Assisted ICU Quality Review Workbench</title>
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="topbar-brand" href="../index.html" aria-label="AI-Assisted ICU Quality Review Workbench home">
+        <span class="brand-mark">ICU</span>
+        <span class="brand-text"><strong>AI-Assisted ICU Quality Review Workbench</strong><span>Static seminar project website</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="../index.html">Home</a>
+        <div class="nav-dropdown">
+          <button class="nav-trigger active" type="button" aria-haspopup="true">Project</button>
+          <div class="dropdown-menu">
+            <a href="research-question.html">Research Question &amp; Goals</a>
+            <a href="system-overview.html">Workbench Overview</a>
+            <a href="architecture.html">Architecture</a>
+            <a href="dataset-preprocessing.html">Dataset &amp; Preprocessing</a>
+            <a href="ai-methodology.html">AI Methodology</a>
+            <a href="evaluation-results.html">Evaluation &amp; Results</a>
+            <a href="development-process.html">Development Process</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-haspopup="true">Materials</button>
+          <div class="dropdown-menu">
+            <a href="related-work.html">Related Work / Articles</a>
+            <a href="user-manual.html">User Manual</a>
+            <a href="team.html">Team</a>
+            <a href="downloads.html">Downloads</a>
+          </div>
+        </div>
+        <a class="nav-link" href="software-system.html">The Software</a>
+        <span class="search-icon" aria-hidden="true"></span>
+      </nav>
+    </div>
+  </header>
+  <main class="main-content">
+    <section class="page-panel">
+      <span class="eyebrow">AI Methodology</span>
+      <h1>Real AI Methods Used in the Software System</h1>
+      <p class="lead">The system uses real machine-learning components to support quality review prioritization and documentation. The methods do not provide diagnosis, medication advice, treatment recommendations, or clinical action instructions.</p>
+    </section>
+
+    <section class="section grid two">
+      <article class="card"><span>Supervised ML</span><h2>Risk Prediction</h2><p>The selected model is Logistic Regression trained on <code>patient_features_ai.csv</code>. The model predicts probability for <code>hospital_expire_flag</code> on held-out data using a preprocessing pipeline.</p></article>
+      <article class="card"><span>Explainable AI</span><h2>Feature Importance</h2><p>The system uses saved model feature importance to show which transformed features contribute most strongly to the model signal for review support.</p></article>
+      <article class="card"><span>Similar cases</span><h2>KNN Retrieval</h2><p>Nearest-neighbor retrieval finds similar processed ICU cases using available numeric features. Similar cases are context only, not treatment guidance.</p></article>
+      <article class="card"><span>Clustering</span><h2>KMeans Context</h2><p>KMeans groups cases into clusters to provide broad cohort context for a reviewed case.</p></article>
+      <article class="card"><span>Anomaly detection</span><h2>IsolationForest</h2><p>IsolationForest estimates whether a case looks unusual compared with the processed academic dataset.</p></article>
+      <article class="card"><span>Uncertainty</span><h2>Probability, Entropy, Threshold Distance, Data Quality</h2><p>Uncertainty combines predicted probability, entropy, distance from Low/Medium/High thresholds, missing important features, and data quality.</p></article>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Risk Bands</span>
+      <h2>Transparent Thresholds</h2>
+      <div class="grid">
+        <div class="metric"><span>Low</span><strong>&lt; 0.33</strong><p>Predicted probability below 33%.</p></div>
+        <div class="metric"><span>Medium</span><strong>0.33 to &lt; 0.67</strong><p>Predicted probability in the middle review band.</p></div>
+        <div class="metric"><span>High</span><strong>&gt;= 0.67</strong><p>Predicted probability at or above 67%.</p></div>
+      </div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Generative AI Boundary</span>
+      <h2>Optional Live Generative AI</h2>
+      <p>Live generative AI is optional and only runs when <code>LLM_API_KEY</code> is configured. Without that key, the system may show structured local summaries derived from the model outputs, but those are not presented as live generative AI.</p>
+      <div class="notice warning"><strong>No fake offline generative AI:</strong> Any offline summary must be understood as deterministic review text assembled from local model outputs and workflow context.</div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Safe Scope</span>
+      <h2>What the AI Does Not Do</h2>
+      <ul>
+        <li>It does not diagnose patients.</li>
+        <li>It does not recommend treatment, medication, or emergency action.</li>
+        <li>It does not replace clinical staff or hospital policy.</li>
+        <li>It supports quality review prioritization, documentation, and auditability only.</li>
+      </ul>
+    </section>
+        </main>
+  <footer class="site-footer">
+        <p>AI-Assisted ICU Quality Review Workbench. Static documentation package for course submission.</p>
+      </footer>
+</body>
+</html>

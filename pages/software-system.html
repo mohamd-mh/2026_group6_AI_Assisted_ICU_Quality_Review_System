@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Software System - AI-Assisted ICU Quality Review Workbench</title>
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="topbar-brand" href="../index.html" aria-label="AI-Assisted ICU Quality Review Workbench home">
+        <span class="brand-mark">ICU</span>
+        <span class="brand-text"><strong>AI-Assisted ICU Quality Review Workbench</strong><span>Static seminar project website</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="../index.html">Home</a>
+        <div class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-haspopup="true">Project</button>
+          <div class="dropdown-menu">
+            <a href="research-question.html">Research Question &amp; Goals</a>
+            <a href="system-overview.html">Workbench Overview</a>
+            <a href="architecture.html">Architecture</a>
+            <a href="dataset-preprocessing.html">Dataset &amp; Preprocessing</a>
+            <a href="ai-methodology.html">AI Methodology</a>
+            <a href="evaluation-results.html">Evaluation &amp; Results</a>
+            <a href="development-process.html">Development Process</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-haspopup="true">Materials</button>
+          <div class="dropdown-menu">
+            <a href="related-work.html">Related Work / Articles</a>
+            <a href="user-manual.html">User Manual</a>
+            <a href="team.html">Team</a>
+            <a href="downloads.html">Downloads</a>
+          </div>
+        </div>
+        <a class="nav-link active" href="software-system.html">The Software</a>
+        <span class="search-icon" aria-hidden="true"></span>
+      </nav>
+    </div>
+  </header>
+  <main class="main-content">
+    <section class="page-panel">
+      <span class="eyebrow">Software System</span>
+      <h1>Separate Runnable Deliverable</h1>
+      <p class="lead">The software product is provided as <a href="../downloads/Software_System.zip">Software_System.zip</a> in the downloads folder. It is a Flask workbench for local academic demonstration, quality-review prioritization, and traceable workflow documentation.</p>
+      <div class="hero-actions">
+        <a class="button" href="../downloads/Software_System.zip">Download Software</a>
+        <a class="button secondary" href="user-manual.html">Open User Manual</a>
+      </div>
+    </section>
+
+    <section class="section grid four">
+      <article class="card summary-card">
+        <span>Workflow</span>
+        <h2>Review queue</h2>
+        <p>Open cases waiting for quality review, follow-up, documentation, or archive action.</p>
+      </article>
+      <article class="card summary-card">
+        <span>AI Review</span>
+        <h2>Risk and context</h2>
+        <p>View risk, confidence, explanation, similar cases, anomaly context, and uncertainty.</p>
+      </article>
+      <article class="card summary-card">
+        <span>Documentation</span>
+        <h2>Review ticket</h2>
+        <p>Set coordinator status, review priority, assigned reviewer, notes, and handoff details.</p>
+      </article>
+      <article class="card summary-card">
+        <span>Auditability</span>
+        <h2>Traceable history</h2>
+        <p>Preserve review changes and audit events for later quality documentation.</p>
+      </article>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Main Pages</span>
+      <h2>Routes and User Workflow</h2>
+      <div class="grid two">
+        <ul>
+          <li>Home</li>
+          <li>Quality Review Queue</li>
+          <li>Add New Case</li>
+          <li>Case Library</li>
+        </ul>
+        <ul>
+          <li>AI Model Report</li>
+          <li>Results &amp; Comparison</li>
+          <li>User Guide</li>
+          <li>Review item detail and audit history</li>
+        </ul>
+      </div>
+      <p>The user can open a queue, add a case, run AI-supported analysis, view risk/confidence/explanation/similar cases/anomaly/uncertainty, prepare a Review Ticket and Prepared Review Summary, update status and priority, add notes, archive records, and review audit events.</p>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">User Actions</span>
+      <h2>What the coordinator can do</h2>
+      <div class="feature-list">
+        <div><strong>Open review queue</strong><p>Find active cases by status, priority, and risk context.</p></div>
+        <div><strong>Add new case</strong><p>Enter manual case details and run the review-support pipeline.</p></div>
+        <div><strong>Use case library</strong><p>Open processed ICU stays and add them to the queue.</p></div>
+        <div><strong>Document review</strong><p>Save status, priority, coordinator notes, Review Ticket fields, and Prepared Review Summary details.</p></div>
+        <div><strong>Review audit trail</strong><p>Inspect trace events created during the local workflow.</p></div>
+      </div>
+    </section>
+
+    <section class="section page-panel">
+  <span class="eyebrow">Simple Start</span>
+  <h2>Run the Software</h2>
+  <p>
+    After downloading <code>Software_System.zip</code>, extract it first. Open a terminal inside the extracted
+    <code>Software_System</code> folder and first try to run the application directly:
+  </p>
+  <pre>python app.py</pre>
+  <p>
+    Then open <code>http://127.0.0.1:5000</code> in the browser.
+  </p>
+</section>
+
+<section class="section grid two">
+  <article class="card">
+    <span>Git Bash Backup</span>
+    <h2>If Dependencies Are Missing</h2>
+    <p>
+      If <code>python app.py</code> does not work in Git Bash because dependencies are missing, create a virtual environment
+      and install the required packages:
+    </p>
+    <pre>python -m venv .venv
+source .venv/Scripts/activate
+pip install -r requirements.txt
+python app.py</pre>
+  </article>
+
+  <article class="card">
+    <span>PowerShell Backup</span>
+    <h2>If Dependencies Are Missing</h2>
+    <p>
+      If <code>python app.py</code> does not work in PowerShell because dependencies are missing, create a virtual environment
+      and install the required packages:
+    </p>
+    <pre>python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python app.py</pre>
+  </article>
+</section>
+
+<section class="section page-panel">
+  <span class="eyebrow">PowerShell Fallback</span>
+  <h2>If Activation Is Blocked</h2>
+  <p>
+    If PowerShell blocks the virtual-environment activation command, run the following command in the same terminal session:
+  </p>
+  <pre>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</pre>
+  <p>
+    Then activate the virtual environment again and run <code>python app.py</code>.
+  </p>
+</section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Open in Browser</span>
+      <h2>Local URL</h2>
+      <p>After the Flask app starts, open this local address:</p>
+      <pre>http://127.0.0.1:5000/</pre>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Local Store</span>
+      <h2>Workflow Storage</h2>
+      <p>The software creates a local SQLite workflow store at runtime for review items, manual cases, notes, prepared summaries, and audit events. The packaged zip excludes the existing runtime database so the submitted product starts clean.</p>
+    </section>
+
+    <section class="section notice safety-note">
+      <span class="eyebrow">Safety Scope</span>
+      <h2>Quality-review support only</h2>
+      <p>The software supports review prioritization and documentation. It does not diagnose patients, recommend treatment, prescribe medication, or replace qualified clinical staff.</p>
+    </section>
+        </main>
+  <footer class="site-footer">
+        <p>AI-Assisted ICU Quality Review Workbench. Static documentation package for course submission.</p>
+      </footer>
+</body>
+</html>

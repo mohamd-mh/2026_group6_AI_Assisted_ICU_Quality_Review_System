@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dataset & Preprocessing - AI-Assisted ICU Quality Review Workbench</title>
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="topbar-brand" href="../index.html" aria-label="AI-Assisted ICU Quality Review Workbench home">
+        <span class="brand-mark">ICU</span>
+        <span class="brand-text"><strong>AI-Assisted ICU Quality Review Workbench</strong><span>Static seminar project website</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="../index.html">Home</a>
+        <div class="nav-dropdown">
+          <button class="nav-trigger active" type="button" aria-haspopup="true">Project</button>
+          <div class="dropdown-menu">
+            <a href="research-question.html">Research Question &amp; Goals</a>
+            <a href="system-overview.html">Workbench Overview</a>
+            <a href="architecture.html">Architecture</a>
+            <a href="dataset-preprocessing.html">Dataset &amp; Preprocessing</a>
+            <a href="ai-methodology.html">AI Methodology</a>
+            <a href="evaluation-results.html">Evaluation &amp; Results</a>
+            <a href="development-process.html">Development Process</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-haspopup="true">Materials</button>
+          <div class="dropdown-menu">
+            <a href="related-work.html">Related Work / Articles</a>
+            <a href="user-manual.html">User Manual</a>
+            <a href="team.html">Team</a>
+            <a href="downloads.html">Downloads</a>
+          </div>
+        </div>
+        <a class="nav-link" href="software-system.html">The Software</a>
+        <span class="search-icon" aria-hidden="true"></span>
+      </nav>
+    </div>
+  </header>
+  <main class="main-content">
+    <section class="page-panel">
+      <span class="eyebrow">Dataset &amp; Preprocessing</span>
+      <h1>Processed Academic ICU Dataset</h1>
+      <p class="lead">The runnable system uses a processed academic ICU feature dataset with 1000 ICU stays. Raw MIMIC files are not included in the final submission package.</p>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Data Provenance</span>
+      <h2>Source of patient_features_ai.csv</h2>
+      <p><code>patient_features_ai.csv</code> is a processed feature table derived from the full MIMIC-III v1.4 dataset provided by the course via a shared Google Drive folder (not a separate or unofficial data source). Source tables: <code>PATIENTS.csv</code>, <code>ADMISSIONS.csv</code>, <code>ICUSTAYS.csv</code>, <code>CHARTEVENTS.csv</code> (~33GB), <code>LABEVENTS.csv</code>, <code>D_ITEMS.csv</code>, <code>D_LABITEMS.csv</code>. Raw files are not included in this submission package due to size; the processed feature table is included instead. The original extraction script is not included in this submission.</p>
+    </section>
+
+    <section class="section grid four">
+      <div class="metric"><span>Rows</span><strong>1000</strong><p>Processed ICU stays.</p></div>
+      <div class="metric"><span>Target label</span><strong>hospital_expire_flag</strong><p>Training/evaluation label only.</p></div>
+      <div class="metric"><span>Label 0</span><strong>894</strong><p>Survived label count.</p></div>
+      <div class="metric"><span>Label 1</span><strong>106</strong><p>Hospital mortality label count.</p></div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Input Features</span>
+      <h2>Model Inputs</h2>
+      <p>The input schema uses demographic context, admission context, vital signs, and laboratory values:</p>
+      <p><code>gender</code>, <code>age</code>, <code>admission_type</code>, <code>heart_rate_avg</code>, <code>heart_rate_max</code>, <code>systolic_bp_avg</code>, <code>respiratory_rate_avg</code>, <code>temperature_avg</code>, <code>spo2_avg</code>, <code>creatinine_max</code>, <code>glucose_max</code>, <code>wbc_max</code>, <code>hemoglobin_min</code>.</p>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Leakage Control</span>
+      <h2>Excluded Columns</h2>
+      <p>The following columns are excluded from model input to prevent leakage and avoid using identifiers as predictors:</p>
+      <p><code>subject_id</code>, <code>hadm_id</code>, <code>icustay_id</code>, <code>hospital_expire_flag</code>.</p>
+      <div class="notice"><strong>Important:</strong> <code>hospital_expire_flag</code> is used only as the supervised training/evaluation label and never as a prediction input.</div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Missing Values</span>
+      <h2>Imputation and Feature Availability</h2>
+      <p>The training pipeline uses median imputation for numeric values, standard scaling for numeric features, most-frequent imputation for categorical values, and one-hot encoding for categorical features.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Feature</th><th>Available Count</th><th>Missing Count</th><th>Available Percent</th></tr></thead>
+          <tbody>
+            <tr><td>heart_rate_avg</td><td>949</td><td>51</td><td>94.9%</td></tr>
+            <tr><td>heart_rate_max</td><td>949</td><td>51</td><td>94.9%</td></tr>
+            <tr><td>systolic_bp_avg</td><td>824</td><td>176</td><td>82.4%</td></tr>
+            <tr><td>respiratory_rate_avg</td><td>820</td><td>180</td><td>82.0%</td></tr>
+            <tr><td>temperature_avg</td><td>809</td><td>191</td><td>80.9%</td></tr>
+            <tr><td>spo2_avg</td><td>819</td><td>181</td><td>81.9%</td></tr>
+            <tr><td>creatinine_max</td><td>685</td><td>315</td><td>68.5%</td></tr>
+            <tr><td>glucose_max</td><td>719</td><td>281</td><td>71.9%</td></tr>
+            <tr><td>wbc_max</td><td>758</td><td>242</td><td>75.8%</td></tr>
+            <tr><td>hemoglobin_min</td><td>792</td><td>208</td><td>79.2%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Sharing Boundary</span>
+      <h2>Data Access</h2>
+      <p>No raw MIMIC files are included. If MIMIC-derived processed data is shared, access should remain private or course-limited according to the applicable data-use terms.</p>
+    </section>
+        </main>
+  <footer class="site-footer">
+        <p>AI-Assisted ICU Quality Review Workbench. Static documentation package for course submission.</p>
+      </footer>
+</body>
+</html>

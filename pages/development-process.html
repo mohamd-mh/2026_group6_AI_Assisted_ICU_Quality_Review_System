@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Development Process - AI-Assisted ICU Quality Review Workbench</title>
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="topbar-brand" href="../index.html" aria-label="AI-Assisted ICU Quality Review Workbench home">
+        <span class="brand-mark">ICU</span>
+        <span class="brand-text"><strong>AI-Assisted ICU Quality Review Workbench</strong><span>Static seminar project website</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="../index.html">Home</a>
+        <div class="nav-dropdown">
+          <button class="nav-trigger active" type="button" aria-haspopup="true">Project</button>
+          <div class="dropdown-menu">
+            <a href="research-question.html">Research Question &amp; Goals</a>
+            <a href="system-overview.html">Workbench Overview</a>
+            <a href="architecture.html">Architecture</a>
+            <a href="dataset-preprocessing.html">Dataset &amp; Preprocessing</a>
+            <a href="ai-methodology.html">AI Methodology</a>
+            <a href="evaluation-results.html">Evaluation &amp; Results</a>
+            <a href="development-process.html">Development Process</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-haspopup="true">Materials</button>
+          <div class="dropdown-menu">
+            <a href="related-work.html">Related Work / Articles</a>
+            <a href="user-manual.html">User Manual</a>
+            <a href="team.html">Team</a>
+            <a href="downloads.html">Downloads</a>
+          </div>
+        </div>
+        <a class="nav-link" href="software-system.html">The Software</a>
+        <span class="search-icon" aria-hidden="true"></span>
+      </nav>
+    </div>
+  </header>
+  <main class="main-content">
+    <section class="page-panel">
+      <span class="eyebrow">Development Process</span>
+      <h1>From Prototype to AI-Assisted Review System</h1>
+      <p class="lead">The project evolved from a baseline ICU risk prototype into a role-focused quality review information system with real ML methods, explainability, workflow documentation, and auditability.</p>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Process</span>
+      <h2>Major Steps</h2>
+      <div class="workflow">
+        <div><p><strong>Initial baseline prototype.</strong> The early version focused on ICU risk scoring and simple comparison outputs.</p></div>
+        <div><p><strong>Baseline correction.</strong> An original set of 10 ad-hoc, uncited rules was replaced with the 4 cited SIRS criteria (Bone et al., 1992) as the baseline pipeline.</p></div>
+        <div><p><strong>Modular agent-inspired workflow.</strong> The project added specialized components for validation, risk assessment, verification, explanation, and traceability. This is a deterministic, rule-based pipeline, not a full autonomous AutoGen-style multi-agent negotiation system.</p></div>
+        <div><p><strong>Faculty feedback.</strong> Feedback identified that the project needed clearer AI content and a clearer real-world user.</p></div>
+        <div><p><strong>Expanded dataset.</strong> The data basis was expanded to 1000 processed ICU stays.</p></div>
+        <div><p><strong>Real ML training.</strong> A supervised ML model was trained and saved with metadata, metrics, thresholds, and feature importance.</p></div>
+        <div><p><strong>Additional AI support.</strong> Explainability, KNN similar-case retrieval, KMeans clustering, IsolationForest anomaly detection, and uncertainty estimation were added.</p></div>
+        <div><p><strong>Information-system features.</strong> The system added review queue, manual case entry, notes, status, priority, archive behavior, and audit history.</p></div>
+        <div><p><strong>Role alignment and UI simplification.</strong> The target user became the ICU Quality &amp; Patient Safety Coordinator, and the interface was simplified around review work.</p></div>
+      </div>
+    </section>
+
+    <section class="section grid two">
+      <article class="card">
+        <span>Challenges</span>
+        <h2>Engineering Challenges</h2>
+        <ul>
+          <li>MIMIC data size and raw-file handling.</li>
+          <li>Preprocessing and missing values.</li>
+          <li>Class imbalance in the target label.</li>
+          <li>Avoiding clinical overclaiming.</li>
+          <li>Separating the website from the runnable software system.</li>
+          <li>Keeping the submitted workbench local, traceable, and safely scoped for academic review support.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <span>Lessons</span>
+        <h2>Lessons Learned</h2>
+        <ul>
+          <li>Real AI must be traceable and grounded in data.</li>
+          <li>Workflow matters as much as model output.</li>
+          <li>Medical AI prototypes need safe scope and explainability.</li>
+          <li>Documentation should clearly distinguish academic review support from clinical deployment.</li>
+          <li>Naming matters: an early "planning-driven multi-agent LLM workflow, inspired by LPW and AutoGen" description overclaimed the system. The corrected description &mdash; a modular, agent-inspired workflow, not a full autonomous AutoGen-style multi-agent negotiation system &mdash; matches what actually runs: a deterministic rule-based pipeline with no LLM call anywhere in the risk-scoring path.</li>
+          <li>Uncited, ad-hoc baseline rules should be replaced with a cited clinical reference standard (SIRS) to give the comparison a defensible baseline.</li>
+        </ul>
+      </article>
+    </section>
+        </main>
+  <footer class="site-footer">
+        <p>AI-Assisted ICU Quality Review Workbench. Static documentation package for course submission.</p>
+      </footer>
+</body>
+</html>

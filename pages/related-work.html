@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Related Work / Articles - AI-Assisted ICU Quality Review Workbench</title>
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="topbar-brand" href="../index.html" aria-label="AI-Assisted ICU Quality Review Workbench home">
+        <span class="brand-mark">ICU</span>
+        <span class="brand-text"><strong>AI-Assisted ICU Quality Review Workbench</strong><span>Static seminar project website</span></span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="../index.html">Home</a>
+        <div class="nav-dropdown">
+          <button class="nav-trigger" type="button" aria-haspopup="true">Project</button>
+          <div class="dropdown-menu">
+            <a href="research-question.html">Research Question &amp; Goals</a>
+            <a href="system-overview.html">Workbench Overview</a>
+            <a href="architecture.html">Architecture</a>
+            <a href="dataset-preprocessing.html">Dataset &amp; Preprocessing</a>
+            <a href="ai-methodology.html">AI Methodology</a>
+            <a href="evaluation-results.html">Evaluation &amp; Results</a>
+            <a href="development-process.html">Development Process</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-trigger active" type="button" aria-haspopup="true">Materials</button>
+          <div class="dropdown-menu">
+            <a href="related-work.html">Related Work / Articles</a>
+            <a href="user-manual.html">User Manual</a>
+            <a href="team.html">Team</a>
+            <a href="downloads.html">Downloads</a>
+          </div>
+        </div>
+        <a class="nav-link" href="software-system.html">The Software</a>
+        <span class="search-icon" aria-hidden="true"></span>
+      </nav>
+    </div>
+  </header>
+  <main class="main-content">
+    <section class="page-panel">
+      <span class="eyebrow">Related Work / Articles</span>
+      <h1>Project-Related Literature</h1>
+      <p class="lead">These five sources support the project framing: agent-inspired modular decomposition, plan-first AI-assisted development, ICU benchmark/prediction task design, MIMIC preprocessing practice, and the clinical scoring literature behind the SIRS baseline and the weighted clinical assessor. They are used as software engineering and methodological influences, not as clinical validation or runtime medical algorithms.</p>
+    </section>
+
+    <section class="section grid two">
+      <article class="card">
+        <span>Paper 1</span>
+        <h2>AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation</h2>
+        <p><strong>Main contribution:</strong> AutoGen presents multi-agent conversation as a programming abstraction, including conversable agents, role separation, tool and code execution, and flexible human-in-the-loop workflows.</p>
+        <p><strong>Contribution to our project:</strong> This inspired the agent-like modular decomposition of the workbench into specialized components for prediction, screening, similar-case retrieval, anomaly detection, uncertainty, explanation, recommendation, and review-support summary. The project does not implement a full autonomous AutoGen system.</p>
+        <p>
+          <a class="button secondary" href="../downloads/papers/AutoGen_Wu_2023.pdf">Download Paper</a>
+          <a class="button secondary" href="../downloads/presentations/AutoGen_Presentation.pptx">Download Presentation</a>
+        </p>
+      </article>
+
+      <article class="card">
+        <span>Paper 2</span>
+        <h2>Planning-Driven Programming: A Large Language Model Workflow for Programming</h2>
+        <p><strong>Main contribution:</strong> Planning-driven programming separates reasoning from implementation: plan first, verify the plan, then code and debug using plan verification before code generation.</p>
+        <p><strong>Contribution to our project:</strong> This inspired the development workflow with AI coding tools and the software's staged AI workflow trace: validate inputs, run prediction, screen, explain, recommend, summarize, and verify through smoke tests. LPW is not used or described as a runtime medical algorithm.</p>
+        <p><a class="button secondary" href="../downloads/papers/Planning_Driven_Programming_LPW_2025.pdf">Download Paper</a></p>
+      </article>
+
+      <article class="card">
+        <span>Paper 3</span>
+        <h2>Harutyunyan et al. (2019) &mdash; Multitask Learning and Benchmarking with Clinical Time Series Data (MIMIC-III Benchmarks)</h2>
+        <p><strong>Main contribution:</strong> Harutyunyan et al. define a set of standard benchmark prediction tasks over MIMIC-III ICU time series (including in-hospital mortality) and a reproducible pipeline for building comparable ICU prediction datasets and models.</p>
+        <p><strong>Contribution to our project:</strong> This informed how we scoped and framed <code>patient_features_ai.csv</code> as a processed, benchmark-style ICU prediction task, and grounded our choice of hospital mortality as the supervised label against established ICU outcome-prediction practice.</p>
+      </article>
+
+      <article class="card">
+        <span>Paper 4</span>
+        <h2>MIMIC-Extract / MIMIC Data Preprocessing Frameworks</h2>
+        <p><strong>Main contribution:</strong> MIMIC-Extract and related preprocessing frameworks describe reproducible pipelines for cleaning, aggregating, and imputing raw MIMIC chart and lab events into structured, model-ready feature tables.</p>
+        <p><strong>Contribution to our project:</strong> This shaped our own preprocessing approach for deriving <code>patient_features_ai.csv</code> from raw MIMIC-III tables: aggregating vitals and labs per ICU stay, handling missing values with median/most-frequent imputation, and excluding identifier columns from model input.</p>
+      </article>
+
+      <article class="card">
+        <span>Paper 5</span>
+        <h2>SIRS (Bone et al., 1992) / APACHE II / SOFA and the Clinical AI Workflow Literature</h2>
+        <p><strong>Main contribution:</strong> Bone et al. (1992) define the Systemic Inflammatory Response Syndrome (SIRS) criteria used as a cited clinical baseline; APACHE II and SOFA are established severity-of-illness scoring systems that combine multiple weighted clinical signals into a single risk assessment.</p>
+        <p><strong>Contribution to our project:</strong> SIRS supplies the cited 4-criterion baseline pipeline (replacing an earlier set of 10 ad-hoc, uncited rules), and the APACHE II/SOFA style of combining weighted clinical signals inspired the Weighted Clinical Assessor stage of the modular workflow, using uncalibrated engineering-judgment weights rather than a validated clinical scoring model.</p>
+      </article>
+    </section>
+        </main>
+  <footer class="site-footer">
+        <p>AI-Assisted ICU Quality Review Workbench. Static documentation package for course submission.</p>
+      </footer>
+</body>
+</html>
