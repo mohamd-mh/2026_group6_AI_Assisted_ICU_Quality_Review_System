@@ -49,8 +49,17 @@
     </section>
 
     <section class="section page-panel">
-      <span class="eyebrow">Methodology</span>
-      <h2>How the System Was Evaluated</h2>
+      <span class="eyebrow">Evaluation Procedure</span>
+      <h2>Engineering Validation Approach</h2>
+      <p>The evaluation combined data, model, workflow, and website/package checks. This is engineering validation for an academic prototype, not clinical validation and not evidence that the system is safe for live clinical deployment.</p>
+      <ul>
+        <li><strong>Data pipeline validation:</strong> checked that the processed MIMIC-III feature file loads correctly, expected fields are present, missing values are handled, and the application can consume the saved dataset, model metadata, and evaluation-result files.</li>
+        <li><strong>Feature/target leakage check:</strong> verified that the supervised target label, <code>hospital_expire_flag</code>, is used for training/evaluation only and excluded from the model input features.</li>
+        <li><strong>Model evaluation:</strong> evaluated the selected Logistic Regression model with accuracy, precision, recall, F1-score, ROC-AUC, and confusion matrix on the held-out test split.</li>
+        <li><strong>Baseline comparison:</strong> compared the modular workflow output with a SIRS-style rule baseline using High-risk and At-risk detection framings.</li>
+        <li><strong>Functional workflow testing:</strong> exercised the coordinator path from dashboard prioritization through Review Ticket creation, notes, checklist, Prepared Review Summary, status updates, and archive controls.</li>
+        <li><strong>Website/package validation:</strong> checked the static project website pages, download links, user manual references, screenshots, and <code>Software_System.zip</code> package availability for final seminar submission.</li>
+      </ul>
       <p>The two result tables below come from two different evaluation procedures, described here before the numbers themselves.</p>
       <div class="grid two">
         <article class="card">
@@ -70,6 +79,28 @@
       <p>The label is imbalanced: 894 survived vs. 106 died (10.6% mortality). A model that always predicted "survived" would already score about 89.4% accuracy while catching zero deaths, so accuracy alone would be misleading here. Precision, recall, F1, ROC-AUC, and the confusion matrix are reported together so both false negatives (missed deaths) and false positives (unnecessary review burden) are visible.</p>
       <h3>High-risk detection vs. At-risk detection</h3>
       <p>The mortality label is binary (survived/died), but both pipelines output three risk tiers (Low/Medium/High). To compare them against the binary label, each pipeline's output is scored two ways: <strong>High-risk detection</strong> counts only a "High" tier as a positive prediction, while <strong>At-risk detection</strong> counts "Medium" or "High" as positive. The two framings show how each pipeline performs under a stricter definition of risk versus a broader one.</p>
+    </section>
+
+    <section class="section page-panel">
+      <span class="eyebrow">Functional Test Cases</span>
+      <h2>Coordinator Workflow and Submission Package Checks</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Test Case</th><th>Action</th><th>Expected Result</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>TC-01 Open GitHub Pages website</td><td>Open the published static project website in a browser.</td><td>Home page loads and navigation links are visible.</td><td>Passed</td></tr>
+            <tr><td>TC-02 Open User Manual and screenshots</td><td>Navigate to the User Manual page and review the screenshot walkthrough.</td><td>User Manual loads and all referenced screenshots are displayed.</td><td>Passed</td></tr>
+            <tr><td>TC-03 Download and extract Software_System.zip</td><td>Download the software package and extract the archive locally.</td><td>Archive extracts into the runnable software folder with source files, templates, static assets, data files, models, and requirements.</td><td>Passed</td></tr>
+            <tr><td>TC-04 Run software with python app.py</td><td>Open a terminal in the extracted software folder and run <code>python app.py</code>.</td><td>Flask application starts locally and is available at <code>http://127.0.0.1:5000</code>.</td><td>Passed</td></tr>
+            <tr><td>TC-05 Dashboard &rarr; Start Next Review</td><td>Open the dashboard and select Start Next Review.</td><td>The workbench opens the highest-priority active Review Ticket for coordinator review.</td><td>Passed</td></tr>
+            <tr><td>TC-06 Open Case Safety Profile</td><td>Open the Case Safety Profile from a review case.</td><td>Risk summary, model signals, SIRS screening context, data-quality context, and supporting evidence are shown.</td><td>Passed</td></tr>
+            <tr><td>TC-07 Add coordinator note and update status</td><td>Add a coordinator note and change the ticket status.</td><td>Note is saved, status is updated, and the audit/history record reflects the change.</td><td>Passed</td></tr>
+            <tr><td>TC-08 Generate Prepared Review Summary</td><td>Generate the Prepared Review Summary from the Review Ticket.</td><td>Structured handoff summary is produced for Quality &amp; Patient Safety Review Team review.</td><td>Passed</td></tr>
+            <tr><td>TC-09 Block archive before Reviewed</td><td>Attempt to archive a ticket before it is marked Reviewed.</td><td>Archive action is blocked until the ticket reaches Reviewed status.</td><td>Passed</td></tr>
+            <tr><td>TC-10 Mark Reviewed then Archive</td><td>Mark a ticket Reviewed and then archive it.</td><td>Reviewed ticket is archived successfully and remains traceable in workflow history.</td><td>Passed</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section class="section page-panel">
