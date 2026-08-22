@@ -16,7 +16,7 @@ https://mohamd-mh.github.io/2026_group6_AI_Assisted_ICU_Quality_Review_System/
 
 The runnable software source code is available here:
 
-https://github.com/mohamd-mh/icu-risk-workflow-final
+https://github.com/domainenguoh/icu-risk-workflow-final
 
 ## Repository Contents
 
